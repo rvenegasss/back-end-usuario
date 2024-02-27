@@ -2,7 +2,7 @@ const User = require("../models/user.model.js");
 
 const actualizarUsuario = async (req, res) => {
   const { id } = req.params;
-  const { name, lastName } = req.body;
+  const { nombre, apellido } = req.body;
   // tomamos el id para buscar en la base de datos a ese usuario
 
   if (!id) {
@@ -27,8 +27,8 @@ const actualizarUsuario = async (req, res) => {
   }
 
   const userChanges = {
-    name: name,
-    lastName: lastName,
+    nombre: nombre,
+    apellido: apellido,
   };
 
   try {
