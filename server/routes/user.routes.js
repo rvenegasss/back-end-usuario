@@ -1,22 +1,18 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from "express";
+import { createUsuarios, deleteUsuarios, getUsuarios, getUsuario, updateUsuarios } from "../controllers/user.createUser.js";
 
 
-const actualizarUsuario = require('../controllers/user.Update.js');
-const crearUsuario = require("../controllers/user.createUser.js");
+const router = Router();
+//Modulos
+router.get("/usuarios", getUsuarios);
+
+router.post("/usuarios", createUsuarios)
+
+router.put("/usuarios/:id", updateUsuarios)
+
+router.delete("/usuarios/:id", deleteUsuarios)
+
+router.get("/usuarios/:id", getUsuario)
 
 
-//crear usuario
-router.post("/crear-usuario", crearUsuario);
-
-
-//actualizar usuario
-router.put("/actualizar-usuario/:id", actualizarUsuario);
-
-//borrar usuario
-router.delete("/eliminar-usuario", (req, res) => {
-    res.send("Ruta DELETE gestionada");
-});
-
-
-module.exports = router;
+export default router;
