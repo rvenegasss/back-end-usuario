@@ -13,4 +13,4 @@ app.use(fileUpload({
 //routes
 app.use(postsRoutes)
 
-export default app
+export default app;

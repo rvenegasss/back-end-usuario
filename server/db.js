@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { MONGODB_URI } from "./config.js";
 
-async function connectDB() {
+const connectDB = async() => {
     try{
         const db= await  mongoose.connect(MONGODB_URI);
         console.log("MongoDB connected to", db.connection.name);
@@ -9,4 +9,4 @@ async function connectDB() {
         console.log(error);
     }
 }
-export default connectDB
+export default connectDB;
