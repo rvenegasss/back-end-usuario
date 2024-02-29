@@ -1,7 +1,7 @@
 
-import app from "./app.js"
-import connectDB from "./db.js"
-import { PORT } from "./config.js"
+import app from "./server/app.js"
+import connectDB from "./server/db.js"
+import { PORT } from "./server/config.js"
 
 
 app.listen(PORT, () => {

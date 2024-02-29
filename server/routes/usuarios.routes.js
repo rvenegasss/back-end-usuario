@@ -3,7 +3,7 @@ import { createUsuarios, deleteUsuarios, getUsuarios, getUsuario, updateUsuarios
 
 
 const router = Router();
-//Modulos
+
 router.get("/usuarios", getUsuarios);
 
 router.post("/usuarios", createUsuarios)
