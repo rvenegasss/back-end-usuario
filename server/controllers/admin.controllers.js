@@ -13,7 +13,7 @@ export const getAdmins = async (req, res) => {
 }
 export const createAdmin = async(req, res) => {
     try{
-        const { nombre, apellido, contraseña, correo, } = req.body;
+        const { nombre, apellido, contrasena, correo, } = req.body;
         let imagen;
 
         if(req.files?.imagen){
@@ -32,7 +32,7 @@ export const createAdmin = async(req, res) => {
         const newAdmin = new Admin({
             nombre,
             apellido,
-            contraseña,
+            contrasena,
             correo,
             imagen
         });
