@@ -1,7 +1,7 @@
 
 import Usuarios from "../models/Usuarios.js";
 
-export const getUsuarios = async (req, res) => {       //
+export const getUsuarios = async (req, res) => {       //obtener todos los usuarios disponibles en la db
     try {
         const usuarios = await Usuarios.find().populate("usuarios");
         res.json(usuarios);
@@ -72,7 +72,7 @@ export const deleteUsuarios = async(req, res)=>{
 }
 
     
-export const getUsuario = async(req, res)=>{        //
+export const getUsuario = async(req, res)=>{        //obtener un usuario específico por su ID
     try{
         const usuario = await Usuarios.findById(req.params.id)
         if(!usuario) return res.sendStatus(404)
