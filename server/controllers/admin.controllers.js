@@ -1,5 +1,5 @@
 import Admin from "../models/Admin.js";
-import { deleteImage, uploadImagenUssuarios } from "../libs/cloudinary.js";
+import { deleteImage} from "../libs/cloudinary.js";
 import fs from "fs-extra"
 import {uploadImagenUsuarios} from "../libs/cloudinary.js"
 

@@ -1,7 +1,7 @@
 import Profesor from "../models/Profesor.js";
-/*import { deleteImage } from "../libs/cloudinary.js";
+import { deleteImage } from "../libs/cloudinary.js";
 import fs from "fs-extra"
-import {uploadImageCursos} from "../libs/cloudinary.js"*/
+import {uploadImagenUsuarios} from "../libs/cloudinary.js"
 
 export const getProfesores = async (req, res) => {
     try {
@@ -17,7 +17,7 @@ export const createProfesor = async(req, res) => {
         let imagen;
 
         if(req.files?.imagen){
-            const result = await uploadImageCursos(req.files.imagen.tempFilePath)
+            const result = await uploadImagenUsuarios(req.files.imagen.tempFilePath)
 
             await fs.remove(req.files.imagen.tempFilePath)   //cloudinary
 
@@ -60,9 +60,9 @@ export const deleteProfesor = async(req, res) => {
         const profesorRemoved = await Profesor.findByIdAndDelete(req.params.id)
         if (!profesorRemoved) return res.sendStatus(404)
 
-        if(cursoRemoved.imagen.public_id){              //ver con cloudinary
-            await deleteImage(cursoRemoved.imagen.public_id)
-        }        await deleteImage(cursoRemoved.imagen.public_id)
+        if(profesorRemoved.imagen.public_id){              //ver con cloudinary
+            await deleteImage(profesorRemoved.imagen.public_id)
+        }        await deleteImage(profesorRemoved.imagen.public_id)
 
         return res.sendStatus(204)
     }catch(error){
