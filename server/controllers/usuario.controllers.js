@@ -12,14 +12,16 @@ export const getUsuarios = async (req, res) => {
 
 export const createUsuarios = async (req, res) => {
     try {
-        const { nombre, apellido, correo, direccion, fechaNacimiento } = req.body;
+        const { nombre, apellido, contraseña, correo, direccion, fechaNacimiento } = req.body;
 
         const newUsuarios = new Usuarios({
             nombre,
             apellido,
+            contraseña,
             correo,
             direccion,
-            fechaNacimiento
+            fechaNacimiento,
+            imagen
         });
         await newUasuarios.save();
         return res.json(newUsuarios);
@@ -34,6 +36,7 @@ export const updateUsuarios = async(req, res) =>{
     try{
         const updateUsuarios = await Uasuarios.findByIdAndUpdate(req.params.id, req.body, {new: true})
         console.log(updateUsuarios)
+        return  res.send("actualizando datos")
     }catch(error){
         console.log(error.message)
     }

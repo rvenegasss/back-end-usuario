@@ -1,23 +1,17 @@
 import { Router } from "express";
-import { AsignarModulo, AsignarRuta, createCurso, deleteCurso, getCurso, getCursos, updateCurso } from "../controllers/cursos.controllers.js";
+import {  createProfesor, deleteProfesor, getProfesores, getProfesor, updateProfesor } from "../controllers/profesor.controllers.js";
 
 const router = Router();
-//cursos
-router.get("/cursos", getCursos);
 
-router.post("/cursos", createCurso)
+router.get("/profesor", getProfesores);
 
-router.put("/cursos/:id", updateCurso)
+router.post("/profesor", createProfesor)
 
-router.delete("/cursos/:id", deleteCurso)
+router.put("/profesor/:id", updateProfesor)
 
-router.get("/cursos/:id", getCurso)
+router.delete("/profesor/:id", deleteProfesor)
 
-//asignar ruta a curso
-router.put("/asignar-ruta/:id", AsignarRuta )
-
-//asignar modulos a curso
-router.put("/asignar-modulo/:id", AsignarModulo )
+router.get("/profesor/:id", getProfesor)
 
 
 export default router;

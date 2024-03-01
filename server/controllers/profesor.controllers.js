@@ -1,25 +1,25 @@
-import Curso from "../models/Curso.js";
-import { deleteImage } from "../libs/cloudinary.js";
+import Profesor from "../models/Profesor.js";
+/*import { deleteImage } from "../libs/cloudinary.js";
 import fs from "fs-extra"
-import {uploadImageCursos} from "../libs/cloudinary.js"
+import {uploadImageCursos} from "../libs/cloudinary.js"*/
 
-export const getCursos = async (req, res) => {
+export const getProfesores = async (req, res) => {
     try {
-        const cursos = await Curso.find().populate("modulos").populate("ruta");
-        res.json(cursos);
+        const profesores = await Profesor.find().populate("profesor");
+        res.json(profesores);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
 }
-export const createCurso = async(req, res) => {
+export const createProfesor = async(req, res) => {
     try{
-        const { nombreCurso, filtro, profesor, duracion } = req.body;
+        const { nombre, apellido, contraseña, correo } = req.body;
         let imagen;
 
         if(req.files?.imagen){
             const result = await uploadImageCursos(req.files.imagen.tempFilePath)
 
-            await fs.remove(req.files.imagen.tempFilePath)
+            await fs.remove(req.files.imagen.tempFilePath)   //cloudinary
 
             console.log(result)
             imagen = {
@@ -29,38 +29,38 @@ export const createCurso = async(req, res) => {
             
         }
 
-        const newCurso = new Curso({
-            nombreCurso,
-            filtro,
-            profesor,
-            duracion,
+        const newProfesor = new Profesor({
+            nombre,
+            apellido,
+            contraseña,
+            correo,
             imagen
         });
-        await newCurso.save();
-        return res.json(newCurso);
+        await newProfesor.save();
+        return res.json(newProfesor);
 
     }catch(error){
         return res.status(500).json({ message: error.message });
     }
 }
-export const updateCurso = async(req, res) => {
+export const updateProfesor = async(req, res) => {
 
     try{
-        const updateCurso = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true})
-        console.log(updateCurso)
-        return  res.send("actualizando curso")
+        const updateProfesor = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        console.log(updateProfesor)
+        return  res.send("actualizando datos")
     }catch(error){
         console.log(error.message)
         return res.status(500).json({message: error.message})
     }
 }
 
-export const deleteCurso = async(req, res) => {
+export const deleteProfesor = async(req, res) => {
     try{
-        const cursoRemoved = await Curso.findByIdAndDelete(req.params.id)
-        if (!cursoRemoved) return res.sendStatus(404)
+        const profesorRemoved = await Profesor.findByIdAndDelete(req.params.id)
+        if (!profesorRemoved) return res.sendStatus(404)
 
-        if(cursoRemoved.imagen.public_id){
+        if(cursoRemoved.imagen.public_id){              //ver con cloudinary
             await deleteImage(cursoRemoved.imagen.public_id)
         }        await deleteImage(cursoRemoved.imagen.public_id)
 
@@ -70,36 +70,14 @@ export const deleteCurso = async(req, res) => {
         return res.status(500).json({message: error.message})
     }
 }
-export const getCurso = async(req, res) => {
+export const getProfesor = async(req, res) => {
     try{
-        const curso = await Curso.findById(req.params.id)
-        if(!curso) return res.sendStatus(404)
-        return res.json(curso)
+        const profesor = await Profesor.findById(req.params.id)
+        if(!profesor) return res.sendStatus(404)
+        return res.json(profesor)
     }catch(error){
         console.log(error.message)
         return res.status(500).json({message: error.message})
     }
 
-}
-export const AsignarRuta = async(req, res) => {
-    const { id } = req.params;
-    const { ruta } = req.body;
-    try{
-        const updateCursoRuta = await Curso.findByIdAndUpdate(id,{$push: { ruta }},{new: true})
-        return res.json(updateCursoRuta)
-    }catch(error){
-        console.log(error.message)
-        return res.status(500).json({message: error.message})
-    }
-} 
-export const AsignarModulo = async(req, res) =>{
-    const { id } = req.params;
-    const { modulos } = req.body;
-    try{ 
-        const updateCursoModulo = await Curso.findByIdAndUpdate(id,{$push: { modulos }},{new: true})
-        return res.json(updateCursoModulo)  
-    }catch(error){
-        console.log(error.message)
-        return res.status(500).json({message: error.message})
-    }
 }
