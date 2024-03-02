@@ -1,5 +1,8 @@
 
 import Usuarios from "../models/Usuarios.js";
+import { deleteImage } from "../libs/cloudinary.js";
+import fs from "fs-extra"
+import {uploadImagenUsuarios} from "../libs/cloudinary.js"
 
 export const getUsuarios = async (req, res) => {       //obtener todos los usuarios disponibles en la db
     try {
@@ -12,7 +15,7 @@ export const getUsuarios = async (req, res) => {       //obtener todos los usuar
 
 export const createUsuarios = async (req, res) => {
     try {
-        const { nombre, apellido, contraseña, correo, direccion, fechaNacimiento } = req.body;
+        const { nombre, apellido, contrasena, correo, direccion, fechaNacimiento } = req.body;
         let imagen;
 
         if(req.files?.imagen){
@@ -31,13 +34,13 @@ export const createUsuarios = async (req, res) => {
         const newUsuarios = new Usuarios({
             nombre,
             apellido,
-            contraseña,
+            contrasena,
             correo,
             direccion,
             fechaNacimiento,
-            imagen
+            imagen,
         });
-        await newUasuarios.save();
+        await newUsuarios.save();
         return res.json(newUsuarios);
 
     }catch(error){

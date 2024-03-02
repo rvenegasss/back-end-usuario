@@ -13,7 +13,7 @@ export const getProfesores = async (req, res) => {
 }
 export const createProfesor = async(req, res) => {
     try{
-        const { nombre, apellido, contraseña, correo } = req.body;
+        const { nombre, apellido, contrasena, correo } = req.body;
         let imagen;
 
         if(req.files?.imagen){
@@ -32,7 +32,7 @@ export const createProfesor = async(req, res) => {
         const newProfesor = new Profesor({
             nombre,
             apellido,
-            contraseña,
+            contrasena,
             correo,
             imagen
         });
