@@ -5,7 +5,7 @@ import {uploadImagenUsuarios} from "../libs/cloudinary.js"
 
 export const getProfesores = async (req, res) => {
     try {
-        const profesores = await Profesor.find().populate("profesor");
+        const profesores = await Profesor.find();
         res.json(profesores);
     } catch (error) {
         return res.status(500).json({ message: error.message });
