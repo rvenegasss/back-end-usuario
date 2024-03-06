@@ -85,3 +85,22 @@ export const getUsuario = async(req, res)=>{        //obtener un usuario especí
     }
 }
 
+
+
+export const loginUsuario = async (correo, contrasena) => {
+  try {
+    const usuario = await Usuarios.findOne({ correo });
+
+    if (!usuario) {
+      throw new Error('Correo electrónico incorrecto');
+    }
+
+    if (usuario.contrasena !== contrasena) {
+      throw new Error('Contraseña incorrecta');
+    }
+
+    return { message: 'Inicio de sesión exitoso', usuario };
+  } catch (error) {
+    throw error;
+  }
+};

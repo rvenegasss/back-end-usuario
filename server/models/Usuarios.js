@@ -13,3 +13,31 @@ const usuariosSchema = new mongoose.Schema({
 })
 
 export default mongoose.model("Usuarios", usuariosSchema)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
