@@ -5,7 +5,7 @@ import {uploadImagenUsuarios} from "../libs/cloudinary.js"
 
 export const getAdmins = async (req, res) => {
     try {
-        const admins = await Admin.find().populate("administrador");
+        const admins = await Admin.find();
         res.json(admins);
     } catch (error) {
         return res.status(500).json({ message: error.message });
@@ -13,7 +13,7 @@ export const getAdmins = async (req, res) => {
 }
 export const createAdmin = async(req, res) => {
     try{
-        const { nombre, apellido, contrasena, correo, } = req.body;
+        const { nombre, apellido,cargo, contrasena, correo, } = req.body;
         let imagen;
 
         if(req.files?.imagen){
@@ -32,6 +32,7 @@ export const createAdmin = async(req, res) => {
         const newAdmin = new Admin({
             nombre,
             apellido,
+            cargo,
             contrasena,
             correo,
             imagen
